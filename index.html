@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seo Lab</title>
+<meta name="description" content="The Seo Lab at the Medical College of Wisconsin develops precision therapy for pancreatic cancer, integrating ex vivo tumor testing, minimally invasive surgery, multiomic profiling and AI.">
+<meta property="og:title" content="Seo Lab | Medical College of Wisconsin">
+<meta property="og:description" content="Precision therapy for pancreatic cancer, vertically integrated.">
+<style>html{color-scheme:light}img{max-width:100%}[hidden]{display:none!important}</style>
+
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: light academic site; one tiled hero band echoing the logo's pancreas tiles, then quiet sections on a 1120px column. */
+:root{
+  --bg:#FBFAFD; --surface:#FFFFFF; --wash:#F2ECF7; --line:#E4DCEC;
+  --ink:#1E1A26; --muted:#5D566B;
+  --accent:#5E2A84; --accent-2:#8A5AA8; --lav:#C9AEDB; --green:#165042; --green-soft:#DDEDE6;
+  --band:#5E2A84; --band-ink:#FFFFFF; --band-muted:#E4D6EE;
+  --logo-plate:transparent; --partner-plate:#FFFFFF;
+  --display:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --w:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141119; --surface:#1C1824; --wash:#231D2D; --line:#342C40;
+  --ink:#EEE9F4; --muted:#A99FB8;
+  --accent:#C9AEDB; --accent-2:#B48CCB; --lav:#6E4E86; --green:#7FC4A8; --green-soft:#1D3029;
+  --band:#2A1D38; --band-ink:#F3EDF8; --band-muted:#C9B8D8;
+  --logo-plate:#F6F2FA; --partner-plate:#F6F2FA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141119; --surface:#1C1824; --wash:#231D2D; --line:#342C40;
+  --ink:#EEE9F4; --muted:#A99FB8;
+  --accent:#C9AEDB; --accent-2:#B48CCB; --lav:#6E4E86; --green:#7FC4A8; --green-soft:#1D3029;
+  --band:#2A1D38; --band-ink:#F3EDF8; --band-muted:#C9B8D8;
+  --logo-plate:#F6F2FA; --partner-plate:#F6F2FA; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--w);margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+h3{font-size:1.2rem}
+.eyebrow{font-family:var(--display);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);font-weight:500}
+.mono{font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+p{margin:0}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand .plate{display:grid;place-items:center;width:40px;height:44px;border-radius:10px;background:var(--logo-plate)}
+.brand img{height:40px;width:auto}
+.brand b{font-family:var(--display);font-weight:500;letter-spacing:.3em;font-size:1.05rem;color:var(--green)}
+nav.main{display:flex;gap:6px 26px;flex-wrap:wrap;align-items:center}
+nav.main a{font-family:var(--display);font-size:1.08rem;font-weight:500;color:var(--ink);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+nav.main a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+nav.main a.navbtn{color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:6px 16px}
+nav.main a.navbtn:hover{background:var(--accent);color:var(--bg)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(40px,7vw,88px)}
+.hero h1{font-size:clamp(2.3rem,5vw,3.6rem);letter-spacing:.14em;white-space:nowrap;font-weight:500;color:var(--accent)}
+.keywords{display:flex;flex-wrap:wrap;gap:6px 0;margin:18px 0 22px;padding:0;list-style:none;font-family:var(--display);font-size:.95rem;color:var(--green)}
+.keywords li:not(:last-child)::after{content:"·";margin:0 .6em;color:var(--lav)}
+.hero .lede{font-size:1.14rem;max-width:36em;color:var(--ink)}
+.cta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px;max-width:480px}
+.cta .btn{text-align:center;padding-inline:10px}
+.btn{font-family:var(--display);font-size:.98rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:var(--surface)}
+.btn:hover{background:var(--accent);color:var(--bg)}
+.btn.solid{background:var(--accent);color:var(--bg)}
+.partners{display:inline-flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:28px;padding:14px 22px;background:var(--partner-plate);border:1px solid var(--line);border-radius:8px;max-width:100%}
+.partners img{display:block;height:auto}
+.partners .mcw{width:92px}
+.partners .labahn{width:190px}
+.partners .divider{width:1px;align-self:stretch;background:var(--line)}
+.hero-photos{display:grid;gap:18px;min-width:0}
+.hero figure{margin:0}
+.hero figure img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px}
+.hero figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+
+section{padding-block:clamp(48px,7vw,84px);border-bottom:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:44em}
+.sec-head p{color:var(--muted)}
+
+/* PI */
+.about{display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,4vw,48px);align-items:center;margin-bottom:clamp(40px,6vw,64px)}
+.about .body{display:grid;gap:14px;min-width:0;max-width:46em}
+.biglogo{display:grid;place-items:center;background:var(--logo-plate);border-radius:10px;padding:8px}
+.biglogo img{width:100%;max-width:240px;height:auto}
+.pi{padding-top:clamp(32px,5vw,48px);border-top:1px solid var(--line)}
+
+.pi{display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+.pi > img{width:100%;max-width:260px;aspect-ratio:1;object-fit:cover;border-radius:6px}
+.pi .body{display:grid;gap:14px;min-width:0;max-width:46em}
+.pi .role{color:var(--muted);font-size:1rem}
+.facts{display:grid;gap:6px;margin-top:8px;padding:16px 18px;background:var(--wash);border-radius:6px;font-size:.95rem}
+.facts div{display:grid;grid-template-columns:8.5em 1fr;gap:12px}
+.facts dt,.facts .k{color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--display);font-size:.95rem}
+
+.pipeline{list-style:none;margin:4px 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:step;border-top:2px solid var(--accent)}
+.pipeline li{counter-increment:step;display:grid;gap:6px;align-content:start;padding:14px 14px 4px 0;min-width:0;position:relative}
+.pipeline li::before{content:counter(step);font-family:var(--mono);font-size:.78rem;color:var(--bg);background:var(--accent);width:22px;height:22px;border-radius:4px;display:grid;place-items:center;margin-top:-26px}
+.pipeline b{font-family:var(--display);font-weight:500;font-size:1rem;line-height:1.25}
+.pipeline span{color:var(--muted);font-size:.9rem;line-height:1.45}
+@media (max-width:760px){.pipeline{grid-template-columns:1fr 1fr;row-gap:14px}}
+@media (max-width:460px){.pipeline{grid-template-columns:1fr}}
+/* research */
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pillar{display:grid;grid-template-rows:auto auto 1fr;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:6px;min-width:0}
+.pillar .tiles{display:grid;grid-template-columns:repeat(6,10px);gap:3px}
+.pillar .tiles i{width:10px;height:10px;border-radius:2px;background:var(--lav);opacity:.45}
+.pillar .tiles i.on{background:var(--accent);opacity:1}
+.pillar p{color:var(--muted);font-size:.98rem}
+
+/* trials */
+.trials{display:grid;gap:0;border-top:1px solid var(--line)}
+.trial{display:grid;grid-template-columns:9em 1fr auto;gap:8px 24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+.trial h3{font-size:1.25rem}
+.trial p{color:var(--muted);font-size:.98rem;grid-column:2}
+.trial .meta{grid-column:2;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.9rem;color:var(--muted)}
+.chip{display:inline-block;font-family:var(--display);font-size:.78rem;letter-spacing:.04em;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.chip.rec{background:var(--green-soft);color:var(--green)}
+.chip.act{background:var(--wash);color:var(--accent)}
+.chip.closed{background:var(--line);color:var(--muted)}
+.chip.dev{background:transparent;color:var(--accent-2);border:1px dashed var(--accent-2)}
+.eap{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:12px 32px;align-items:center;padding:22px 24px;background:var(--wash);border-radius:6px}
+.eap p{color:var(--muted);max-width:44em}
+@media (max-width:640px){.eap{grid-template-columns:1fr}}
+
+/* pubs */
+.pubgroups{display:grid;gap:36px}
+.pubgroup h3{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px}
+.pub{display:grid;grid-template-columns:4.5em 1fr;gap:4px 18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.pub .yr{font-family:var(--mono);color:var(--muted);font-size:.9rem;padding-top:2px}
+.pub .t{font-weight:600;min-width:0}
+.pub .a{grid-column:2;color:var(--muted);font-size:.92rem}
+.pub .j{grid-column:2;font-size:.92rem}
+.pub .j i{color:var(--green)}
+.me{color:var(--ink);font-weight:600}
+.note{font-style:italic;font-size:.85rem}
+
+/* talks */
+.talks{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.95rem}
+th{font-family:var(--display);font-weight:500;text-align:left;color:var(--muted);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:0 12px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.d{font-family:var(--mono);font-size:.85rem;color:var(--muted);white-space:nowrap}
+td .type{display:block;font-size:.85rem;color:var(--accent-2)}
+.sub{font-family:var(--display);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);margin:28px 0 8px}
+
+/* people */
+.people{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 20px}
+.person{display:grid;gap:8px;min-width:0;align-content:start;grid-template-rows:auto auto 1fr}
+.person img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:var(--wash)}
+.person b{font-family:var(--display);font-weight:500;font-size:1.05rem}
+.ph{aspect-ratio:1;border-radius:6px;background:var(--wash);display:grid;place-items:center;background-image:linear-gradient(var(--bg) 2px,transparent 2px),linear-gradient(90deg,var(--bg) 2px,transparent 2px);background-size:14px 14px}
+.person .ph span{font-family:var(--display);font-size:1.6rem;letter-spacing:.08em;color:var(--accent-2);background:var(--wash);padding:4px 10px;border-radius:4px}
+.staff{grid-template-columns:repeat(4,minmax(0,1fr))}
+.students{grid-template-columns:repeat(4,minmax(0,1fr))}
+.students.alumni{grid-template-columns:repeat(4,minmax(0,1fr))}
+.person span{color:var(--muted);font-size:.92rem;line-height:1.35}
+
+/* contact band */
+.band{background:var(--band);color:var(--band-ink);border-bottom:none}
+.band .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.band h2{color:var(--band-ink)}
+.band p,.band address{color:var(--band-muted);font-style:normal}
+.band .eyebrow{color:var(--band-muted)}
+.copy{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.copy code{font-family:var(--mono);font-size:1rem;color:var(--band-ink);user-select:all}
+.copy button{font-family:var(--display);font-size:.85rem;background:transparent;color:var(--band-ink);border:1px solid var(--band-muted);border-radius:999px;padding:5px 14px;cursor:pointer}
+footer{padding-block:28px;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .people,.students,.staff,.students.alumni{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .band .grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .pi,.about{grid-template-columns:1fr}
+  .biglogo img{max-width:180px}
+  .people,.students,.staff,.students.alumni{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trial{grid-template-columns:1fr}
+  .trial p,.trial .meta{grid-column:1}
+  .pub{grid-template-columns:1fr}
+  .pub .a,.pub .j{grid-column:1}
+  .facts div{grid-template-columns:1fr;gap:0}
+  body{font-size:16px}
+}
+</style>
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Seo Lab home"><span class="plate"><img src="img/logo-mark.svg" alt=""></span><b>SEO LAB</b></a>
+    <nav class="main" aria-label="Sections">
+      <a href="#research">Research</a><a href="#trials">Trials</a><a href="#people">People</a><a href="#publications">Publications</a><a href="#talks">Talks</a><a href="#contact">Join Us</a><a class="navbtn" href="https://www.mcw.edu/departments/pancreatic-cancer">LaBahn Program</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <canvas id="tiles" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Medical College of Wisconsin · LaBahn Pancreatic Cancer Program</p>
+      <h1>SEO LAB</h1>
+      <ul class="keywords" aria-label="Focus areas">
+        <li>Robotic Surgery</li><li>Precision Medicine</li><li>AI Integration of Multiomics</li><li>Novel Clinical Trial Designs</li>
+      </ul>
+      <p class="lede">We develop precision therapy for pancreatic cancer in a vertically integrated way, from tissue acquisition and ex vivo drug sensitivity testing, through minimally invasive surgical resection, to multiomic profiling of patient specimens and ex vivo models, with AI integrating the full data stream.</p>
+      <nav class="cta" aria-label="Jump to section"><a class="btn" href="#research">Research</a><a class="btn" href="#trials">Trials</a><a class="btn" href="#people">People</a><a class="btn" href="#publications">Publications</a><a class="btn" href="#talks">Talks</a><a class="btn" href="#contact">Join Us</a></nav>
+      <div class="partners" aria-label="Institutional partners">
+        <a href="https://www.mcw.edu"><img src="img/mcw.png" alt="Medical College of Wisconsin" class="mcw"></a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="https://www.mcw.edu/departments/pancreatic-cancer"><img src="img/labahn.png" alt="MCW LaBahn Pancreatic Cancer Program" class="labahn"></a>
+      </div>
+    </div>
+    <div class="hero-photos">
+      <figure>
+        <img src="img/hero-lab.jpg" alt="Dr. Seo and Dr. Chandrashekar in the laboratory examining a sample">
+      </figure>
+      <figure>
+        <img src="img/robot-or.jpg" alt="Dr. Seo and Dr. Kothari in scrubs in a robotic operating room">
+      </figure>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="biglogo"><img src="img/logo-mark.svg" alt="Seo Lab logo: scalpel, pancreas and DNA helix"></div>
+    <div class="body">
+      <p class="eyebrow">About the lab</p>
+      <h2>Precision therapy, vertically integrated</h2>
+      <p>The Seo Lab pursues precision therapy for pancreatic cancer through a vertically integrated pipeline. Each patient's tumor is followed from the moment tissue is obtained to a treatment recommendation, and every step of that data stream is generated within the lab and its clinical partners.</p>
+      <ol class="pipeline" aria-label="The lab's pipeline">
+        <li><b>Tissue acquisition and ex vivo testing</b><span>Biopsy and surgical specimens are cultured as living tumor slices to measure drug sensitivity.</span></li>
+        <li><b>Minimally invasive resection</b><span>Robotic and minimally invasive surgery removes the tumor and supplies clinically annotated specimens.</span></li>
+        <li><b>Multiomic profiling</b><span>Clinical specimens and matched ex vivo models are profiled at the genomic, transcriptomic, pathologic and spatial levels.</span></li>
+        <li><b>AI integration</b><span>Machine learning combines these data streams to predict response and outcome and to inform clinical trial design.</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrap pi">
+    <img src="img/people/seo-david-clinic.jpg" alt="Dr. Y. David Seo in clinic">
+    <div class="body">
+      <p class="eyebrow">Principal Investigator</p>
+      <h2>Y. David Seo, MD</h2>
+      <p class="role">Assistant Professor of Surgery, Division of Surgical Oncology, Medical College of Wisconsin</p>
+      <p>Dr. Seo is a surgical oncologist and a member of the MCW Cancer Center and the LaBahn Pancreatic Cancer Program. He received his A.B. from Harvard University and his M.D. from the University of Michigan, completed general surgery residency at the University of Washington with a research fellowship at the Fred Hutchinson Cancer Center, and trained in Complex General Surgical Oncology at MD Anderson Cancer Center.</p>
+      <dl class="facts">
+        <div><dt class="k">Board certified</dt><dd style="margin:0">General Surgery; Complex General Surgical Oncology</dd></div>
+        <div><dt class="k">Memberships</dt><dd style="margin:0">SSO, AACR, ASCO, SSAT, AAS, Central Surgical Association</dd></div>
+      </dl>
+      <div class="links">
+        <a href="https://scholar.google.com/citations?user=xAzNMSsAAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://www.ncbi.nlm.nih.gov/myncbi/1JwiYIvCguCkN/bibliography/public/">NCBI bibliography</a>
+        <a href="https://x.com/DavidSeoMD">X @DavidSeoMD</a>
+        <a href="https://www.mcw.edu/find-a-doctor/seo-yongwoo">MCW profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Research</p>
+      <h2>Three questions, one patient at a time</h2>
+      <p>Each program starts with human tissue from our own patients and returns to the clinic as a treatment decision or a trial design.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <div class="tiles" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+        <h3>Functional precision oncology</h3>
+        <p>We culture thin slices of living tumor from surgical resections and core needle biopsies and measure how each patient's cancer responds to candidate therapies within days. This ex vivo platform anchors the Pancreas Precision Medicine program at MCW.</p>
+      </article>
+      <article class="pillar">
+        <div class="tiles" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+        <h3>AI integration of multiomics</h3>
+        <p>We build machine learning models that combine genomic, transcriptomic, pathologic and clinical data to predict outcomes and guide treatment. Examples include e19-9, an AI-derived tumor marker for patients who do not produce CA19-9, and survival models that use TP53 variant allele frequency.</p>
+      </article>
+      <article class="pillar">
+        <div class="tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <h3>Tumor immune microenvironment</h3>
+        <p>We map immune cells within human pancreatic tumors to understand why most patients do not respond to immunotherapy. Spatial analysis of intact tissue is a growing focus of the lab.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="trials">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Clinical trials</p>
+      <h2>Translation in prospective trials</h2>
+      <p>The lab contributes translational science to trials in the MCW LaBahn Pancreatic Cancer Program.</p>
+    </div>
+    <div class="trials">
+      <div class="trial">
+        <span class="mono">NCT03704662</span>
+        <h3>SOFT Preop</h3>
+        <span class="chip act">Accrual complete</span>
+        <p>Randomized phase II trial of preoperative stereotactic body radiation therapy versus conventionally fractionated chemoradiation for resectable, borderline resectable or locally advanced type A pancreatic adenocarcinoma.</p>
+        <div class="meta"><span>PI: William A. Hall, MD</span><a href="https://clinicaltrials.gov/study/NCT03704662">ClinicalTrials.gov</a></div>
+      </div>
+      <div class="trial">
+        <span class="mono">NCT03322995</span>
+        <h3>PANC</h3>
+        <span class="chip rec">Recruiting</span>
+        <p>Phase II trial of adaptive modification of neoadjuvant therapy based on clinical response in patients with localized pancreatic cancer.</p>
+        <div class="meta"><span>MCW LaBahn Pancreatic Cancer Program</span><a href="https://clinicaltrials.gov/study/NCT03322995">ClinicalTrials.gov</a></div>
+      </div>
+      <div class="trial">
+        <span class="mono">NCT04683315</span>
+        <h3>PANCREAS</h3>
+        <span class="chip closed">Closed</span>
+        <p>Phase II trial of PurIST classification-guided adaptive neoadjuvant chemotherapy, using RNA expression profiling of endoscopic ultrasound aspiration samples.</p>
+        <div class="meta"><span>MCW LaBahn Pancreatic Cancer Program</span><a href="https://clinicaltrials.gov/study/NCT04683315">ClinicalTrials.gov</a></div>
+      </div>
+      <div class="trial">
+        <span class="mono">MCW IIT</span>
+        <h3>PANC-PLUS</h3>
+        <span class="chip dev">In development</span>
+        <p>Oligometastatic PANcreatic Cancer: Progression-Limiting Utility of SBRT, Surgery, and Sonographic Ablation. A single-arm investigator-initiated trial for patients with oligometastatic pancreatic cancer. Patients receive metastasis-directed therapy with stereotactic body radiation, surgery or histotripsy, and tissue-based drug sensitivity testing with molecular profiling guides precision therapy after treatment.</p>
+        <div class="meta"><span>PI: Y. David Seo, MD</span><span>Co-PIs: William A. Hall, MD; Mandana Kamgar, MD, MPH</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">People</p>
+      <h2>The lab</h2>
+    </div>
+    <div class="people staff">
+      <div class="person"><img src="img/people/chandrashekar-naveen.jpg" alt="Naveen Kumar Chandrashekar"><b>Naveen Kumar Chandrashekar, PhD</b><span>Postdoctoral Fellow</span></div>
+      <div class="person"><img src="img/people/gaur-kshitij.jpg" alt="Kshitij Gaur"><b>Kshitij Gaur, MD</b><span>T32 Resident Research Fellow</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>SB</span></div><b>Swapna Bera, PhD</b><span>Precision Medicine Coordinator and Technician</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>ES</span></div><b>Ella Scheuber</b><span>Lab Manager and Research Technologist</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>BN</span></div><b>Bhabishya Neupane</b><span>Senior Programmer Analyst</span></div>
+      <div class="person"><img src="img/people/sochor-matt.jpg" alt="Matt Sochor"><b>Matt Sochor, PhD</b><span>Data Scientist</span></div>
+      <div class="person"><img src="img/people/mena-melissa.jpg" alt="Melissa Mena"><b>Melissa Mena</b><span>Director, LaBahn Pancreatic Cancer Program</span></div>
+    </div>
+    <p class="sub">Medical students</p>
+    <div class="people students">
+      <div class="person"><img src="img/people/yuan-jason.jpg" alt="Jason Yuan"><b>Jason Yuan</b><span>MS3</span></div>
+      <div class="person"><img src="img/people/yun-bahda.jpg" alt="Bahda Yun"><b>Bahda Yun</b><span>MS3</span></div>
+      <div class="person"><img src="img/people/chen-eugene.jpg" alt="Eugene Chen"><b>Eugene Chen</b><span>MS3</span></div>
+      <div class="person"><img src="img/people/said-imaad.jpg" alt="Imaad Said"><b>Imaad Said</b><span>MS3</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>MZ</span></div><b>Megan Zeller</b><span>MS3</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>TH</span></div><b>Thomas Hansen</b><span>MS3</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>EO</span></div><b>Eddie Opichka</b><span>MS2</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>MS</span></div><b>Maggie Shee</b><span>MS2</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>RR</span></div><b>Rhea Rahim</b><span>MS2</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>AS</span></div><b>Aiden Schmitz</b><span>MS1</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>PH</span></div><b>Peter Husander</b><span>MS1</span></div>
+    </div>
+    <p class="sub">Alumni</p>
+    <div class="people students alumni">
+      <div class="person"><img src="img/people/senthilkumar-gopika.jpg" alt="Gopika SenthilKumar"><b>Gopika SenthilKumar, MD, PhD</b><span>General Surgery Resident, University of Pennsylvania</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>SM</span></div><b>Shahmeer Mohydin, MD</b><span>General Surgery Resident, Houston Methodist</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Publications</p>
+      <h2>Selected publications</h2>
+      <p>Full lists: <a href="https://scholar.google.com/citations?user=xAzNMSsAAAAJ&amp;hl=en">Google Scholar</a> · <a href="https://www.ncbi.nlm.nih.gov/myncbi/1JwiYIvCguCkN/bibliography/public/">NCBI bibliography</a></p>
+    </div>
+    <div class="pubgroups">
+      <div class="pubgroup">
+        <h3>MCW Seo Lab</h3>
+        <div class="pub"><span class="yr">2026</span><span class="t">Allele-specific mechanisms guide salvage therapy to overcome daraxonrasib resistance in pancreatic cancer</span><span class="a">Dorbin D, Herrera J, Davidson R, Chandrashekar NK, … <span class="me">Seo YD</span>, Kurzrock R, Hobbs GA, Kamgar M, McFall T</span><span class="j"><i>Cancer Research</i> · <a href="https://doi.org/10.1158/0008-5472.CAN-26-1181">doi:10.1158/0008-5472.CAN-26-1181</a></span></div>
+        <div class="pub"><span class="yr">2026</span><span class="t">AI-derived electronic tumor marker for cancer antigen 19-9 nonproducers with pancreatic ductal adenocarcinoma</span><span class="a">Thalji SZ, Aldakkak M, Ramamurthi A, … <span class="me">Seo YD</span>, … Tsai S, Kothari AN</span><span class="j"><i>JAMA Surgery</i> 161:508–516 · <a href="https://doi.org/10.1001/jamasurg.2026.0291">doi:10.1001/jamasurg.2026.0291</a></span></div>
+        <div class="pub"><span class="yr">2026</span><span class="t">Mutant and wild-type RAS cross-talk and stoichiometric deficiencies are determinants of sensitivity to targeted therapies in KRAS<sup>G12R</sup> pancreatic ductal adenocarcinoma</span><span class="a">Kamgar M, Hobbs GA, Davidson R, … <span class="me">Seo YD</span>, … McFall T</span><span class="j"><i>Cancer Research</i> 86:2042–2059 · <a href="https://doi.org/10.1158/0008-5472.CAN-25-0018">doi:10.1158/0008-5472.CAN-25-0018</a></span></div>
+        <div class="pub"><span class="yr">2025</span><span class="t">Understanding unrealized trial enrollments following patient-to-trial matching with large language models</span><span class="a">Verhagen CT, Westerman G, Heaviland H, … <span class="me">Seo YD</span>, Clarke CN, George B, Kothari AN</span><span class="j"><i>Surgery</i> 191:109915 · <a href="https://doi.org/10.1016/j.surg.2025.109915">doi:10.1016/j.surg.2025.109915</a></span></div>
+      </div>
+      <div class="pubgroup">
+        <h3>Earlier highlights</h3>
+        <div class="pub"><span class="yr">2025</span><span class="t">Cancer testis antigen expression correlates with immune activation and survival in small bowel neuroendocrine tumors</span><span class="a">Ayabe RI*, <span class="me">Seo YD*</span>, Melendez B, … Maxwell JE <span class="note">(*contributed equally)</span></span><span class="j"><i>JCO Precision Oncology</i> e2500107 · <a href="https://doi.org/10.1200/PO-25-00107">doi:10.1200/PO-25-00107</a></span></div>
+        <div class="pub"><span class="yr">2024</span><span class="t">Randomized placebo-controlled, biomarker-stratified phase Ib microbiome modulation in melanoma: impact of antibiotic preconditioning on microbiome and immunity</span><span class="a">Glitza IC*, <span class="me">Seo YD*</span>, Spencer CN, Wortman JR, … Wargo JA <span class="note">(*contributed equally)</span></span><span class="j"><i>Cancer Discovery</i> · <a href="https://doi.org/10.1158/2159-8290.CD-24-0066">doi:10.1158/2159-8290.CD-24-0066</a></span></div>
+        <div class="pub"><span class="yr">2023</span><span class="t">Efficacy of immune checkpoint inhibitors for the treatment of advanced melanoma in patients with concomitant chronic lymphocytic leukemia</span><span class="a">Cass SH, Tobin JWD, <span class="me">Seo YD</span>, Gener-Ricos G, … Long GV, Wargo JA, Ferrajoli A</span><span class="j"><i>Annals of Oncology</i> 34:796–805 · <a href="https://doi.org/10.1016/j.annonc.2023.06.007">doi:10.1016/j.annonc.2023.06.007</a></span></div>
+        <div class="pub"><span class="yr">2023</span><span class="t">Toll-like receptor 4 agonist injection with concurrent radiotherapy in patients with metastatic soft tissue sarcoma: a phase 1 nonrandomized controlled trial</span><span class="a"><span class="me">Seo YD</span>, Lu H, Black G, … Pollack SM</span><span class="j"><i>JAMA Oncology</i> · <a href="https://doi.org/10.1001/jamaoncol.2023.4015">doi:10.1001/jamaoncol.2023.4015</a></span></div>
+        <div class="pub"><span class="yr">2020</span><span class="t">Tumor slice culture as a biologic surrogate of human cancer</span><span class="a">Kenerson HL, Sullivan KM, <span class="me">Seo YD</span>, … Yeung RS</span><span class="j"><i>Annals of Translational Medicine</i> 8:114 · <a href="https://doi.org/10.21037/atm.2019.12.88">doi:10.21037/atm.2019.12.88</a></span></div>
+        <div class="pub"><span class="yr">2019</span><span class="t">Mobilization of CD8+ T cells via CXCR4 blockade facilitates PD-1 checkpoint therapy in human pancreatic cancer</span><span class="a"><span class="me">Seo YD</span>, Jiang X, Sullivan KM, … Pillarisetty VG</span><span class="j"><i>Clinical Cancer Research</i> 25:3934–3945 · <a href="https://doi.org/10.1158/1078-0432.CCR-19-0081">doi:10.1158/1078-0432.CCR-19-0081</a></span></div>
+        <div class="pub"><span class="yr">2019</span><span class="t">Establishment of slice cultures as a tool to study the cancer immune microenvironment</span><span class="a">Jiang X, <span class="me">Seo YD</span>, Sullivan KM, Pillarisetty VG</span><span class="j"><i>Methods in Molecular Biology</i> 1884:283–295 · <a href="https://doi.org/10.1007/978-1-4939-8885-3_20">doi:10.1007/978-1-4939-8885-3_20</a></span></div>
+        <div class="pub"><span class="yr">2017</span><span class="t">Long-lived pancreatic ductal adenocarcinoma slice cultures enable precise study of the immune microenvironment</span><span class="a">Jiang X, <span class="me">Seo YD</span>, Chang JH, … Pillarisetty VG</span><span class="j"><i>Oncoimmunology</i> 6:e1333210 · <a href="https://doi.org/10.1080/2162402X.2017.1333210">doi:10.1080/2162402X.2017.1333210</a></span></div>
+      </div>
+      <div class="pubgroup">
+        <h3>Reviews</h3>
+        <div class="pub"><span class="yr">2026</span><span class="t">Optimal management of resectable pancreatic ductal adenocarcinoma</span><span class="a"><span class="me">Seo YD</span>, Kamgar M</span><span class="j"><i>Annals of Pancreatic Cancer</i> 9:4 · <a href="https://doi.org/10.21037/apc-25-33">doi:10.21037/apc-25-33</a></span></div>
+        <div class="pub"><span class="yr">2025</span><span class="t">The Landmark Series: the future of pancreatic cancer clinical trials</span><span class="a"><span class="me">Seo YD</span>, Katz MHG, Snyder RA</span><span class="j"><i>Annals of Surgical Oncology</i> 32:2777–2785 · <a href="https://doi.org/10.1245/s10434-024-16840-2">doi:10.1245/s10434-024-16840-2</a></span></div>
+        <div class="pub"><span class="yr">2022</span><span class="t">Preoperative therapy for pancreatic adenocarcinoma: precision beyond anatomy</span><span class="a"><span class="me">Seo YD</span>, Katz MHG</span><span class="j"><i>Cancer</i> 128:3041–3056 · <a href="https://doi.org/10.1002/cncr.34273">doi:10.1002/cncr.34273</a></span></div>
+        <div class="pub"><span class="yr">2020</span><span class="t">The CXCL12-CXCR4/CXCR7 axis as a mechanism of immune resistance in gastrointestinal malignancies</span><span class="a">Daniel SK, <span class="me">Seo YD</span>, Pillarisetty VG</span><span class="j"><i>Seminars in Cancer Biology</i> 65:176–188 · <a href="https://doi.org/10.1016/j.semcancer.2019.12.007">doi:10.1016/j.semcancer.2019.12.007</a></span></div>
+        <div class="pub"><span class="yr">2017</span><span class="t">T-cell programming in pancreatic adenocarcinoma: a review</span><span class="a"><span class="me">Seo YD</span>, Pillarisetty VG</span><span class="j"><i>Cancer Gene Therapy</i> 24:106–113 · <a href="https://doi.org/10.1038/cgt.2016.66">doi:10.1038/cgt.2016.66</a></span></div>
+      </div>
+      <div class="pubgroup">
+        <h3>Other works</h3>
+        <div class="pub"><span class="yr">2025</span><span class="t">Defining the role of adjuvant radiotherapy for biliary tract cancers: a site-specific propensity-matched analysis</span><span class="a"><span class="me">Seo YD</span>, Acidi B, Newton A, Haddad A, … Vauthey JN, Tran Cao HS</span><span class="j"><i>Cancers</i> 17:494 · <a href="https://doi.org/10.3390/cancers17030494">doi:10.3390/cancers17030494</a></span></div>
+        <div class="pub"><span class="yr">2024</span><span class="t">Intratumoral T-cell receptor repertoire composition predicts overall survival in patients with pancreatic ductal adenocarcinoma</span><span class="a">Pothuri VS, Hogg GD, Conant L, … <span class="me">Seo YD</span>, Hawkins WG, Pillarisetty VG, DeNardo DG, Fields RC</span><span class="j"><i>Oncoimmunology</i> 13:2320411 · <a href="https://doi.org/10.1080/2162402X.2024.2320411">doi:10.1080/2162402X.2024.2320411</a></span></div>
+        <div class="pub"><span class="yr">2023</span><span class="t">Blockade of interleukin 10 potentiates antitumour immune function in human colorectal cancer liver metastases</span><span class="a">Sullivan KM, Jiang X, Guha P, … <span class="me">Seo YD</span>, … Pillarisetty VG</span><span class="j"><i>Gut</i> 72:325–337 · <a href="https://doi.org/10.1136/gutjnl-2021-325808">doi:10.1136/gutjnl-2021-325808</a></span></div>
+        <div class="pub"><span class="yr">2022</span><span class="t">Neoadjuvant therapy induces a potent immune response to sarcoma, dominated by myeloid and B cells</span><span class="a">Goff PH, Riolobos L, LaFleur BJ, Spraker MB, <span class="me">Seo YD</span>, … Pollack SM</span><span class="j"><i>Clinical Cancer Research</i> 28:1701–1711 · <a href="https://doi.org/10.1158/1078-0432.CCR-21-4239">doi:10.1158/1078-0432.CCR-21-4239</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="talks">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Talks and posters</p>
+      <h2>Presented at national meetings</h2>
+      <p>Presenter listed for each talk and poster.</p>
+    </div>
+    <div class="talks">
+      <table>
+        <thead><tr><th>Date</th><th>Meeting</th><th>Work</th><th>Presenter</th></tr></thead>
+        <tbody>
+          <tr><td class="d">Sep 2026</td><td>Society of Asian Academic Surgeons Annual Meeting, Cincinnati<span class="type">Plenary oral</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy as a platform for real-time personalized therapy in pancreatic adenocarcinoma</td><td>M. Shee</td></tr>
+          <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>Oncostatin M receptor is a tumor-selective target in pancreatic ductal adenocarcinoma</td><td>N. Chandrashekar</td></tr>
+          <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>Lung as the first site of recurrence predicts long-term overall survival in resected pancreatic adenocarcinoma</td><td>K. Gaur</td></tr>
+          <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>TP53 mutant variant allele frequency improves machine-learning prediction of post-operative survival in pancreatic cancer and marks a proliferative transcriptional program</td><td>K. Gaur</td></tr>
+          <tr><td class="d">May 2026</td><td>Pancreas Club, Chicago<span class="type">Oral</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy</td><td>Y.D. Seo</td></tr>
+          <tr><td class="d">May 2026</td><td>Pancreas Club, Chicago<span class="type">Oral</span></td><td>Variant allele frequency machine learning model identifies TP53-mutant phenotypes with worse post-operative survival</td><td>K. Gaur</td></tr>
+          <tr><td class="d">Mar 2026</td><td>Society of Surgical Oncology Annual Meeting, Phoenix<span class="type">Oral</span></td><td>TP53 mutant variant allele frequency improves machine learning prediction of post-operative survival in pancreatic cancer</td><td>I. Said</td></tr>
+          <tr><td class="d">Oct 2025</td><td>AACR Pancreatic Cancer Symposium, Boston<span class="type">Invited poster</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy</td><td>N. Chandrashekar</td></tr>
+          <tr><td class="d">Sep 2025</td><td>Society of Asian Academic Surgeons Annual Meeting, Huntington Beach<span class="type">Oral</span></td><td>Prolonged survival after resection of isolated metachronous pulmonary metastases in pancreatic adenocarcinoma</td><td>B. Yun</td></tr>
+          <tr><td class="d">Jun 2025</td><td>Central Surgical Association Annual Meeting, Indianapolis<span class="type">Oral</span></td><td>Impact of surgery on overall survival in locally advanced pancreatic adenocarcinoma</td><td>G. SenthilKumar</td></tr>
+          <tr><td class="d">May 2025</td><td>Digestive Disease Week, San Diego<span class="type">SSAT Shark Tank Innovator Contest, selected SSAT representative</span></td><td>Bridging biopsy to bedside: organotypic core cultures for precision oncology</td><td>Y.D. Seo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="band">
+  <div class="wrap grid">
+    <div style="display:grid;gap:14px">
+      <p class="eyebrow">Join us</p>
+      <h2>Train with the lab</h2>
+      <p>We welcome inquiries from medical students, residents and postdoctoral candidates interested in translational pancreatic cancer research. Send a CV and a short note on your interests.</p>
+      <div class="copy"><code id="email">dseo@mcw.edu</code><button type="button" id="copyBtn">Copy email</button></div>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <p class="eyebrow">Contact</p>
+      <address>Seo Lab<br>Division of Surgical Oncology<br>Medical College of Wisconsin<br>8701 Watertown Plank Road<br>Milwaukee, WI 53226</address>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Seo Lab · Medical College of Wisconsin · MCW Cancer Center · LaBahn Pancreatic Cancer Program</span>
+    <span>© 2026 Seo Lab</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // tile field echoing the logo: fine tiles fading toward the right, a few highlighted
+  const c=document.getElementById('tiles'); if(!c) return;
+  function draw(){
+    const r=c.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    c.width=r.width*d; c.height=r.height*d;
+    const x=c.getContext('2d'); x.scale(d,d);
+    const cs=getComputedStyle(document.documentElement);
+    const lav=cs.getPropertyValue('--lav').trim(), acc=cs.getPropertyValue('--accent').trim();
+    const s=9, g=4, step=s+g, W=r.width, H=r.height;
+    let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+    const hi=[];
+    for(let yy=0; yy<H; yy+=step){
+      for(let xx=0; xx<W; xx+=step){
+        const t=xx/W; const fade=Math.max(0,.34*(1-t*1.25)) * (0.55+0.45*rnd());
+        if(fade<.02) continue;
+        x.globalAlpha=fade; x.fillStyle=lav; x.fillRect(xx,yy,s,s);
+        if(rnd()<.0035 && t<.55) hi.push([xx,yy]);
+      }
+    }
+    x.globalAlpha=.55; x.fillStyle=acc; hi.slice(0,5).forEach(([a,b])=>x.fillRect(a,b,s,s));
+    x.globalAlpha=1;
+  }
+  draw(); let tm; addEventListener('resize',()=>{clearTimeout(tm);tm=setTimeout(draw,150)});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',draw);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  const b=document.getElementById('copyBtn'), e=document.getElementById('email');
+  b.addEventListener('click',()=>{
+    navigator.clipboard?.writeText(e.textContent).then(()=>{b.textContent='Copied'},()=>{
+      const sel=getSelection(), rg=document.createRange(); rg.selectNodeContents(e); sel.removeAllRanges(); sel.addRange(rg); b.textContent='Selected, press copy';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
