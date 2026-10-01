@@ -25,13 +25,8 @@
   --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --w:1120px;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#141119; --surface:#1C1824; --wash:#231D2D; --line:#342C40;
-  --ink:#EEE9F4; --muted:#A99FB8;
-  --accent:#C9AEDB; --accent-2:#B48CCB; --lav:#6E4E86; --green:#7FC4A8; --green-soft:#1D3029;
-  --band:#2A1D38; --band-ink:#F3EDF8; --band-muted:#C9B8D8;
-  --logo-plate:#F6F2FA; --partner-plate:#F6F2FA; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#141119; --surface:#1C1824; --wash:#231D2D; --line:#342C40;
   --ink:#EEE9F4; --muted:#A99FB8;
@@ -109,13 +104,13 @@ section{padding-block:clamp(48px,7vw,84px);border-bottom:1px solid var(--line)}
 .facts dt,.facts .k{color:var(--muted)}
 .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--display);font-size:.95rem}
 
-.pipeline{list-style:none;margin:4px 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:step;border-top:2px solid var(--accent)}
-.pipeline li{counter-increment:step;display:grid;gap:6px;align-content:start;padding:14px 14px 4px 0;min-width:0;position:relative}
-.pipeline li::before{content:counter(step);font-family:var(--mono);font-size:.78rem;color:var(--bg);background:var(--accent);width:22px;height:22px;border-radius:4px;display:grid;place-items:center;margin-top:-26px}
-.pipeline b{font-family:var(--display);font-weight:500;font-size:1rem;line-height:1.25}
-.pipeline span{color:var(--muted);font-size:.9rem;line-height:1.45}
-@media (max-width:760px){.pipeline{grid-template-columns:1fr 1fr;row-gap:14px}}
-@media (max-width:460px){.pipeline{grid-template-columns:1fr}}
+.pipeline{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;counter-reset:step;position:relative}
+.pipeline li:not(:last-child)::after{content:"";position:absolute;left:12px;top:26px;bottom:0;width:2px;background:var(--accent)}
+.pipeline li{counter-increment:step;display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:16px;row-gap:2px;padding:0 0 18px;position:relative}
+.pipeline li:last-child{padding-bottom:0}
+.pipeline li::before{content:counter(step);grid-row:1 / span 2;font-family:var(--mono);font-size:.8rem;color:var(--bg);background:var(--accent);width:26px;height:26px;border-radius:4px;display:grid;place-items:center}
+.pipeline b{grid-column:2;font-family:var(--display);font-weight:500;font-size:1.02rem;line-height:1.3;padding-top:2px}
+.pipeline span{grid-column:2;color:var(--muted);font-size:.93rem;line-height:1.5}
 /* research */
 .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .pillar{display:grid;grid-template-rows:auto auto 1fr;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:6px;min-width:0}
@@ -123,6 +118,21 @@ section{padding-block:clamp(48px,7vw,84px);border-bottom:1px solid var(--line)}
 .pillar .tiles i{width:10px;height:10px;border-radius:2px;background:var(--lav);opacity:.45}
 .pillar .tiles i.on{background:var(--accent);opacity:1}
 .pillar p{color:var(--muted);font-size:.98rem}
+.pillar{grid-template-rows:auto auto 1fr auto}
+.pillar p.cite{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.pillar p.cite a{color:var(--accent)}
+.schema{width:100%;height:auto;display:block;background:var(--wash);border-radius:4px;padding:6px}
+.schema text{font-family:var(--body);font-size:12.5px;fill:var(--muted);text-anchor:middle}
+.schema text.lab{text-anchor:start;fill:var(--ink);font-weight:600}
+.schema text.cap{font-size:11px;font-style:italic}
+.schema .soft{fill:var(--surface);stroke:var(--lav);stroke-width:1.2}
+.schema .tile,.schema .bar,.schema .cell{fill:var(--lav)}
+.schema .on{fill:var(--accent)}
+.schema .drop{fill:var(--green)}
+.schema .node{fill:var(--accent)}
+.schema .arrow,.schema .link,.schema .axis{fill:none;stroke:var(--accent-2);stroke-width:1.4}
+.schema .arrow{marker-end:url(#arrowhead)}
+.ah{fill:var(--accent-2)}
 
 /* trials */
 .trials{display:grid;gap:0;border-top:1px solid var(--line)}
@@ -224,7 +234,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <ul class="keywords" aria-label="Focus areas">
         <li>Robotic Surgery</li><li>Precision Medicine</li><li>AI Integration of Multiomics</li><li>Novel Clinical Trial Designs</li>
       </ul>
-      <p class="lede">We develop precision therapy for pancreatic cancer in a vertically integrated way, from tissue acquisition and ex vivo drug sensitivity testing, through minimally invasive surgical resection, to multiomic profiling of patient specimens and ex vivo models, with AI integrating the full data stream.</p>
+      <p class="lede">Our lab investigates the real-time delivery of precision therapy for pancreatic cancer through a vertically integrated approach: from tissue acquisition using minimally invasive surgery to ex vivo drug sensitivity models, multiomic profiling of clinical specimens, and AI-powered integration of real-world data.</p>
       <nav class="cta" aria-label="Jump to section"><a class="btn" href="#research">Research</a><a class="btn" href="#trials">Trials</a><a class="btn" href="#people">People</a><a class="btn" href="#publications">Publications</a><a class="btn" href="#talks">Talks</a><a class="btn" href="#contact">Join Us</a></nav>
       <div class="partners" aria-label="Institutional partners">
         <a href="https://www.mcw.edu"><img src="img/mcw.png" alt="Medical College of Wisconsin" class="mcw"></a>
@@ -248,13 +258,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="biglogo"><img src="img/logo-mark.svg" alt="Seo Lab logo: scalpel, pancreas and DNA helix"></div>
     <div class="body">
       <p class="eyebrow">About the lab</p>
-      <h2>Precision therapy, vertically integrated</h2>
-      <p>The Seo Lab pursues precision therapy for pancreatic cancer through a vertically integrated pipeline. Each patient's tumor is followed from the moment tissue is obtained to a treatment recommendation, and every step of that data stream is generated within the lab and its clinical partners.</p>
-      <ol class="pipeline" aria-label="The lab's pipeline">
-        <li><b>Tissue acquisition and ex vivo testing</b><span>Biopsy and surgical specimens are cultured as living tumor slices to measure drug sensitivity.</span></li>
-        <li><b>Minimally invasive resection</b><span>Robotic and minimally invasive surgery removes the tumor and supplies clinically annotated specimens.</span></li>
-        <li><b>Multiomic profiling</b><span>Clinical specimens and matched ex vivo models are profiled at the genomic, transcriptomic, pathologic and spatial levels.</span></li>
-        <li><b>AI integration</b><span>Machine learning combines these data streams to predict response and outcome and to inform clinical trial design.</span></li>
+      <h2>Our approach</h2>
+      <p>We follow each patient's tumor from the operating room into the laboratory and back to the clinic. Tissue removed at surgery is tested against drugs, profiled in molecular detail and linked to the patient's clinical course, so that what we learn can inform treatment and the design of clinical trials.</p>
+      <ol class="pipeline" aria-label="The lab's approach, step by step">
+        <li><b>Tissue acquisition</b><span>Tumor tissue is collected from core needle biopsies and during robotic and other minimally invasive operations, together with the patient's clinical data.</span></li>
+        <li><b>Ex vivo drug sensitivity models</b><span>Thin slices and core cultures of the living tumor are treated with candidate drugs to measure how that tumor responds.</span></li>
+        <li><b>Multiomic profiling</b><span>Patient tissue and the matched lab models are studied by DNA and RNA sequencing, pathology and spatial methods that map tumor and immune cells in place.</span></li>
+        <li><b>AI integration</b><span>We use machine learning, foundation models and large language models to synthesize the multiomic data with real-world clinical data and predict treatment response and resistance patterns.</span></li>
       </ol>
     </div>
   </div>
@@ -283,24 +293,57 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Research</p>
-      <h2>Three questions, one patient at a time</h2>
-      <p>Each program starts with human tissue from our own patients and returns to the clinic as a treatment decision or a trial design.</p>
+      <h2>Current projects</h2>
+      <p>Each project starts with tissue from patients treated in our program.</p>
     </div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" class="ah"/></marker></defs></svg>
     <div class="pillars">
       <article class="pillar">
-        <div class="tiles" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
-        <h3>Functional precision oncology</h3>
-        <p>We culture thin slices of living tumor from surgical resections and core needle biopsies and measure how each patient's cancer responds to candidate therapies within days. This ex vivo platform anchors the Pancreas Precision Medicine program at MCW.</p>
+        <svg class="schema" viewBox="0 0 280 130" role="img" aria-label="Schematic: a core biopsy is cut into slices, the slices are treated with drugs, and viability and histology are read out within days">
+          <rect class="soft" x="8" y="40" width="44" height="12" rx="6"/><text x="30" y="80">Core</text><text x="30" y="95">biopsy</text>
+          <path class="arrow" d="M58 46h16"/>
+          <rect class="tile" x="80" y="30" width="13" height="13" rx="2"/><rect class="tile" x="97" y="30" width="13" height="13" rx="2"/><rect class="tile on" x="80" y="47" width="13" height="13" rx="2"/><rect class="tile" x="97" y="47" width="13" height="13" rx="2"/>
+          <text x="95" y="80">Slices</text>
+          <path class="arrow" d="M116 46h16"/>
+          <rect class="soft" x="138" y="28" width="36" height="36" rx="4"/><circle class="drop" cx="156" cy="46" r="7"/><text x="156" y="80">Drug</text>
+          <path class="arrow" d="M180 46h16"/>
+          <rect class="bar" x="204" y="34" width="10" height="28"/><rect class="bar on" x="218" y="48" width="10" height="14"/><path class="axis" d="M200 62h32"/>
+          <circle class="cell" cx="248" cy="38" r="5"/><circle class="cell on" cx="262" cy="50" r="5"/><circle class="cell" cx="247" cy="56" r="4"/>
+          <text x="236" y="80">Viability,</text><text x="236" y="95">histology</text>
+          <text class="cap" x="140" y="120">Readout within days</text>
+        </svg>
+        <h3>Organotypic slice culture of core biopsies</h3>
+        <p>We cut standard-of-care core needle biopsies and surgical specimens into thin slices that keep the tumor and its surrounding cells intact. The slices are treated with the chemotherapy and targeted agents a patient might receive, and response is measured within days by a viability assay and by histology for tumor density, proliferation and cell death. The goal is a practical, real-time sensitivity test that can inform treatment of metastatic pancreatic cancer.</p>
+        <p class="cite">Manuscript under review at <i>Clinical Cancer Research</i></p>
       </article>
       <article class="pillar">
-        <div class="tiles" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
-        <h3>AI integration of multiomics</h3>
-        <p>We build machine learning models that combine genomic, transcriptomic, pathologic and clinical data to predict outcomes and guide treatment. Examples include e19-9, an AI-derived tumor marker for patients who do not produce CA19-9, and survival models that use TP53 variant allele frequency.</p>
+        <svg class="schema" viewBox="0 0 280 130" role="img" aria-label="Schematic: biopsy slices from KRAS G12D and KRAS G12R tumors are treated with daraxonrasib and assessed for viability and pERK by immunohistochemistry">
+          <text class="lab" x="8" y="31">G12D</text><text class="lab" x="8" y="83">G12R</text>
+          <rect class="tile" x="48" y="20" width="13" height="13" rx="2"/><rect class="tile" x="64" y="20" width="13" height="13" rx="2"/>
+          <rect class="tile on" x="48" y="72" width="13" height="13" rx="2"/><rect class="tile on" x="64" y="72" width="13" height="13" rx="2"/>
+          <path class="arrow" d="M84 27h34"/><path class="arrow" d="M84 79h34"/><text x="101" y="57">daraxonrasib</text>
+          <rect class="soft" x="124" y="14" width="92" height="26" rx="4"/><text x="170" y="31">viability, pERK</text>
+          <rect class="soft" x="124" y="66" width="92" height="26" rx="4"/><text x="170" y="83">viability, pERK</text>
+          <path class="link" d="M219 27h6v52h-6M225 53h5"/>
+          <text x="254" y="50">Allele</text><text x="254" y="64">specific</text>
+          <text class="cap" x="140" y="120">KRAS-mutant biopsy slices, Fig. 1N–O</text>
+        </svg>
+        <h3>RAS inhibitor response in patient tissue</h3>
+        <p>We contributed to work led by the McFall laboratory, using slice cultures of treatment-naive biopsies to test the RAS(ON) inhibitor daraxonrasib in tumors carrying different KRAS mutations. Slices from a KRAS G12R tumor lost more viability and nuclear density than slices from a KRAS G12D tumor, and immunostaining for phosphorylated ERK showed pathway suppression in the G12R tissue that was not seen in the G12D tissue at 48 hours. The study connects allele-specific RAS biology to the choice of salvage therapy after resistance.</p>
+        <p class="cite"><a href="https://doi.org/10.1158/0008-5472.CAN-26-1181">Dorbin, Herrera, Davidson et al. <i>Cancer Research</i> 2026, Figure 1N–O</a></p>
       </article>
       <article class="pillar">
-        <div class="tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
-        <h3>Tumor immune microenvironment</h3>
-        <p>We map immune cells within human pancreatic tumors to understand why most patients do not respond to immunotherapy. Spatial analysis of intact tissue is a growing focus of the lab.</p>
+        <svg class="schema" viewBox="0 0 280 130" role="img" aria-label="Schematic: genomic, transcriptomic and clinical surgical data are combined to study response to neoadjuvant therapy and outcomes after resection">
+          <rect class="soft" x="4" y="10" width="112" height="26" rx="13"/><text x="60" y="27">Genomics (CGP)</text>
+          <rect class="soft" x="4" y="50" width="112" height="26" rx="13"/><text x="60" y="67">Transcriptomics</text>
+          <rect class="soft" x="4" y="90" width="112" height="26" rx="13"/><text x="60" y="107">Clinical, surgical</text>
+          <path class="link" d="M116 23C136 23 134 63 150 63M116 63h34M116 103C136 103 134 63 150 63"/>
+          <circle class="node" cx="160" cy="63" r="10"/>
+          <path class="arrow" d="M174 63h18"/>
+          <text x="232" y="45">Neoadjuvant</text><text x="232" y="59">response</text><text x="232" y="79">Outcome after</text><text x="232" y="93">resection</text>
+        </svg>
+        <h3>Drivers of neoadjuvant response and outcome</h3>
+        <p>The LaBahn Pancreatic Cancer Program takes a unified approach to neoadjuvant therapy, delivering chemotherapy followed by chemoradiation before surgery. The program has conducted several neoadjuvant clinical trials with novel designs that ask which precision and adaptive approaches best optimize response before resection. All resected tumors undergo comprehensive genomic profiling (CGP), and the resulting genomic and transcriptomic data are linked back to clinical and surgical data to identify drivers of response to neoadjuvant therapy and of outcomes after resection.</p>
       </article>
     </div>
   </div>
@@ -370,7 +413,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="person"><div class="ph" aria-hidden="true"><span>MZ</span></div><b>Megan Zeller</b><span>MS3</span></div>
       <div class="person"><div class="ph" aria-hidden="true"><span>TH</span></div><b>Thomas Hansen</b><span>MS3</span></div>
       <div class="person"><div class="ph" aria-hidden="true"><span>EO</span></div><b>Eddie Opichka</b><span>MS2</span></div>
-      <div class="person"><div class="ph" aria-hidden="true"><span>MS</span></div><b>Maggie Shee</b><span>MS2</span></div>
+      <div class="person"><img src="img/people/shee-maggie.jpg" alt="Maggie Shee"><b>Maggie Shee</b><span>MS2</span></div>
       <div class="person"><div class="ph" aria-hidden="true"><span>RR</span></div><b>Rhea Rahim</b><span>MS2</span></div>
       <div class="person"><div class="ph" aria-hidden="true"><span>AS</span></div><b>Aiden Schmitz</b><span>MS1</span></div>
       <div class="person"><div class="ph" aria-hidden="true"><span>PH</span></div><b>Peter Husander</b><span>MS1</span></div>
@@ -433,20 +476,20 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="sec-head">
       <p class="eyebrow">Talks and posters</p>
       <h2>Presented at national meetings</h2>
-      <p>Presenter listed for each talk and poster.</p>
     </div>
     <div class="talks">
       <table>
         <thead><tr><th>Date</th><th>Meeting</th><th>Work</th><th>Presenter</th></tr></thead>
         <tbody>
-          <tr><td class="d">Sep 2026</td><td>Society of Asian Academic Surgeons Annual Meeting, Cincinnati<span class="type">Plenary oral</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy as a platform for real-time personalized therapy in pancreatic adenocarcinoma</td><td>M. Shee</td></tr>
-          <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>Oncostatin M receptor is a tumor-selective target in pancreatic ductal adenocarcinoma</td><td>N. Chandrashekar</td></tr>
+          <tr><td class="d">Sep 2026</td><td>Society of Asian Academic Surgeons Annual Meeting, Cincinnati<span class="type">Plenary oral</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy as a platform for real-time personalized therapy in pancreatic adenocarcinoma</td><td>M. Shee<br>Y.D. Seo</td></tr>
+          <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>Oncostatin M receptor is a tumor-selective target in pancreatic ductal adenocarcinoma</td><td>N. Chandrashekar<br>E. Opichka</td></tr>
           <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>Lung as the first site of recurrence predicts long-term overall survival in resected pancreatic adenocarcinoma</td><td>K. Gaur</td></tr>
           <tr><td class="d">Sep 2026</td><td>AACR Special Conference on Pancreatic Cancer, San Diego<span class="type">Poster</span></td><td>TP53 mutant variant allele frequency improves machine-learning prediction of post-operative survival in pancreatic cancer and marks a proliferative transcriptional program</td><td>K. Gaur</td></tr>
           <tr><td class="d">May 2026</td><td>Pancreas Club, Chicago<span class="type">Oral</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy</td><td>Y.D. Seo</td></tr>
           <tr><td class="d">May 2026</td><td>Pancreas Club, Chicago<span class="type">Oral</span></td><td>Variant allele frequency machine learning model identifies TP53-mutant phenotypes with worse post-operative survival</td><td>K. Gaur</td></tr>
+          <tr><td class="d">Apr 2026</td><td>AACR Annual Meeting, San Diego<span class="type">Poster</span></td><td>TP53 mutant variant allele frequency can improve machine learning prediction of post-operative survival outcomes in pancreatic cancer</td><td>E. Chen<br>M. Zeller</td></tr>
           <tr><td class="d">Mar 2026</td><td>Society of Surgical Oncology Annual Meeting, Phoenix<span class="type">Oral</span></td><td>TP53 mutant variant allele frequency improves machine learning prediction of post-operative survival in pancreatic cancer</td><td>I. Said</td></tr>
-          <tr><td class="d">Oct 2025</td><td>AACR Pancreatic Cancer Symposium, Boston<span class="type">Invited poster</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy</td><td>N. Chandrashekar</td></tr>
+          <tr><td class="d">Oct 2025</td><td>AACR Pancreatic Cancer Symposium, Boston<span class="type">Invited poster</span></td><td>Ex vivo organotypic tumor model of metastatic core biopsy</td><td>N. Chandrashekar<br>J. Yuan</td></tr>
           <tr><td class="d">Sep 2025</td><td>Society of Asian Academic Surgeons Annual Meeting, Huntington Beach<span class="type">Oral</span></td><td>Prolonged survival after resection of isolated metachronous pulmonary metastases in pancreatic adenocarcinoma</td><td>B. Yun</td></tr>
           <tr><td class="d">Jun 2025</td><td>Central Surgical Association Annual Meeting, Indianapolis<span class="type">Oral</span></td><td>Impact of surgery on overall survival in locally advanced pancreatic adenocarcinoma</td><td>G. SenthilKumar</td></tr>
           <tr><td class="d">May 2025</td><td>Digestive Disease Week, San Diego<span class="type">SSAT Shark Tank Innovator Contest, selected SSAT representative</span></td><td>Bridging biopsy to bedside: organotypic core cultures for precision oncology</td><td>Y.D. Seo</td></tr>
