@@ -26,10 +26,18 @@
   --bg:#0F1716; --surface:#16211F; --ink:#E9F1EF; --muted:#A9BAB6; --line:#26332F;
   --chip-bg:#16211F; --chip-on:#9CCFC6; --chip-on-ink:#0F1716; --link:#9CCFC6; color-scheme:dark }
 * { box-sizing:border-box; }
+[hidden] { display:none !important; }
 body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.55 var(--body); }
 .wrap { max-width:1120px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
-.band { background:var(--green); color:#fff; }
-.band .wrap { padding-block:28px 32px; display:grid; gap:18px; }
+.band { position:relative; overflow:hidden; background:var(--green); color:#fff; }
+.band canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.band .wrap { position:relative; padding-block:28px 32px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:24px; }
+.band-l { display:grid; gap:18px; min-width:0; }
+.seolab { display:grid; justify-items:center; gap:10px; color:#fff; text-decoration:none; font:500 13px/1 var(--display); letter-spacing:.3em; padding-left:.3em; }
+.seolab img { height:104px; width:auto; display:block; transition:transform .15s; }
+.seolab:hover img { transform:scale(1.05); }
+.seolab:focus-visible { outline:3px solid var(--tint); outline-offset:6px; border-radius:6px; }
+@media (max-width:640px) { .band .wrap { gap:14px; } .seolab img { height:64px; } .seolab { font-size:10px; gap:7px; } }
 .crumb { font:500 13px/1 var(--display); letter-spacing:.12em; text-transform:uppercase; color:var(--pale); }
 .crumb a { color:#fff; text-decoration:none; } .crumb a:hover { text-decoration:underline; }
 .lockup { width:min(460px, 100%); height:auto; display:block; }
@@ -42,6 +50,7 @@ h1 { font:500 clamp(28px, 4vw, 38px)/1.15 var(--display); margin:0; text-wrap:ba
 .chip[aria-pressed="true"] span { color:inherit; opacity:.8; }
 .chip:focus-visible, .poster:focus-visible { outline:3px solid var(--tint); outline-offset:2px; }
 .grid { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:28px 22px; }
+.card[hidden] { display:none; }
 .card { display:grid; gap:12px; align-content:start; min-width:0; }
 .poster { position:relative; display:block; aspect-ratio:16/9; max-width:100%; border-radius:8px; overflow:hidden; background:var(--green); }
 .poster::before { content:""; position:absolute; inset:12% 30% 12% 30%; background:url(/img/robotic-hpb/RoboticHPB_mark_white_512.png) center/contain no-repeat; opacity:.18; }
@@ -62,13 +71,16 @@ h1 { font:500 clamp(28px, 4vw, 38px)/1.15 var(--display); margin:0; text-wrap:ba
 .note a { color:var(--link); }
 footer { border-top:1px solid var(--line); }
 footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding-block:24px; font-size:14px; color:var(--muted); }
-@media (prefers-reduced-motion: reduce) { .play { transition:none; } }
+@media (prefers-reduced-motion: reduce) { .play, .seolab img { transition:none; } }
 </style>
 </head>
 <body>
-<header class="band"><div class="wrap">
-  <p class="crumb"><a href="/">Seo Lab</a> &nbsp;/&nbsp; Robotic HPB surgery</p>
-  <img class="lockup" src="/img/robotic-hpb/RoboticHPB_lockup_horizontal_white_1600.png" alt="MCW Surgical Oncology, Robotic Hepatobiliary Surgery">
+<header class="band"><canvas id="tiles" aria-hidden="true"></canvas><div class="wrap">
+  <div class="band-l">
+    <p class="crumb"><a href="/">Seo Lab</a> &nbsp;/&nbsp; Robotic HPB surgery</p>
+    <img class="lockup" src="/img/robotic-hpb/RoboticHPB_lockup_horizontal_white_1600.png" alt="MCW Surgical Oncology, Robotic Hepatobiliary Surgery">
+  </div>
+  <a class="seolab" href="/" aria-label="Seo Lab home"><img src="/img/logo-mark-white.svg" alt=""><span>SEO LAB</span></a>
 </div></header>
 <main><div class="wrap">
   <h1>Robotic HPB surgery videos</h1>
@@ -225,7 +237,7 @@ footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:
   </div>
 </li></ul>
   <section class="note">
-    <p>Videos play here in YouTube's privacy-enhanced player, which loads only when you press play. Full list: <a href="https://www.youtube.com/playlist?list=PLgcKHxS89B_By4SjKCnIm1_I6_IY6G4CP" target="_blank" rel="noopener">MCW Surgical Oncology robotic surgery playlist</a>.</p>
+    <p>Each video opens on YouTube in a new tab. Full playlist: <a href="https://www.youtube.com/playlist?list=PLgcKHxS89B_By4SjKCnIm1_I6_IY6G4CP" target="_blank" rel="noopener">MCW Surgical Oncology robotic surgery playlist</a>.</p>
   </section>
 </div></main>
 <footer><div class="wrap"><span>Seo Lab · Medical College of Wisconsin · Division of Surgical Oncology</span><span>© 2026 Seo Lab · Last updated October 23, 2026</span></div></footer>
@@ -236,78 +248,26 @@ chips.forEach(c=>c.addEventListener('click',()=>{
   const f=c.dataset.f; cards.forEach(k=>k.hidden = !(f==='all' || k.dataset.cat===f));
 }));
 </script>
-<dialog class="player" id="player" aria-labelledby="pl-title">
-  <div class="pl-head">
-    <div class="pl-meta"><p class="cat" id="pl-cat"></p><h2 id="pl-title"></h2><p class="pl-dx" id="pl-dx"></p></div>
-    <button type="button" class="pl-x" id="pl-close" aria-label="Close video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  </div>
-  <div class="pl-frame" id="pl-frame"></div>
-  <div class="pl-foot">
-    <button type="button" class="pl-nav" id="pl-prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Previous</button>
-    <a id="pl-yt" href="#" target="_blank" rel="noopener">Watch on YouTube</a>
-    <button type="button" class="pl-nav" id="pl-next">Next<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-  </div>
-</dialog>
-<style>
-.player { width:min(1100px, calc(100vw - 32px), calc((100dvh - 210px) * 16 / 9)); max-height:calc(100dvh - 32px); padding:0; border:0; border-radius:10px; background:#0B1513; color:#fff; overflow:auto; }
-.player::backdrop { background:rgba(4,12,11,.82); }
-.pl-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 18px 14px; }
-.pl-meta { display:grid; gap:4px; min-width:0; }
-.player .cat { color:var(--tint); }
-.pl-head h2 { margin:0; font:500 clamp(19px, 2.4vw, 24px)/1.25 var(--display); text-wrap:balance; }
-.pl-dx { margin:0; font-size:15px; color:#A9BAB6; }
-.pl-dx:empty { display:none; }
-.pl-x { flex:none; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; display:grid; place-items:center; cursor:pointer; }
-.pl-x svg { width:20px; height:20px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; }
-.pl-frame { aspect-ratio:16/9; background:#000; }
-.pl-frame iframe { display:block; width:100%; height:100%; border:0; }
-.pl-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px 16px; font:500 15px/1 var(--display); }
-.pl-foot a { color:var(--tint); }
-.pl-nav { display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 14px; border-radius:999px; border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; font:inherit; cursor:pointer; }
-.pl-nav svg { width:16px; height:16px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-.pl-nav:disabled { opacity:.35; cursor:default; }
-.pl-x:focus-visible, .pl-nav:focus-visible, .pl-foot a:focus-visible { outline:3px solid var(--tint); outline-offset:2px; }
-@media (max-width:520px) { .pl-foot a { order:3; flex-basis:100%; text-align:center; padding-top:6px; } .pl-foot { flex-wrap:wrap; } }
-</style>
 <script>
 (function(){
-  // Click-to-load player: nothing from YouTube loads until someone presses play.
-  const dlg=document.getElementById('player'), frame=document.getElementById('pl-frame');
-  const $=id=>document.getElementById(id);
-  const all=[...document.querySelectorAll('.card')];
-  let list=[], cur=-1, opener=null;
-  function vis(){ return all.filter(c=>!c.hidden); }
-  function show(i){
-    cur=i; const c=list[i], a=c.querySelector('.poster'), id=a.dataset.vid;
-    $('pl-cat').textContent=c.querySelector('.cat').textContent;
-    $('pl-title').textContent=c.querySelector('h3').textContent;
-    $('pl-dx').textContent=(c.querySelector('.dx')||{}).textContent||'';
-    $('pl-yt').href=a.href;
-    frame.innerHTML='';
-    const f=document.createElement('iframe');
-    f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
-    f.title=c.querySelector('h3').textContent;
-    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
-    f.allowFullscreen=true; f.referrerPolicy='strict-origin-when-cross-origin';
-    frame.appendChild(f);
-    $('pl-prev').disabled=i===0; $('pl-next').disabled=i===list.length-1;
-    history.replaceState(null,'','#'+id);
+  // Square tile field, as on the Seo Lab home page: dense on the right, fading toward the lockup.
+  const c=document.getElementById('tiles'); if(!c) return;
+  function draw(){
+    const r=c.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    c.width=r.width*d; c.height=r.height*d;
+    const x=c.getContext('2d'); x.scale(d,d);
+    const s=9, g=4, step=s+g, W=r.width, H=r.height;
+    let seed=11; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+    const hi=[];
+    for(let yy=0; yy<H; yy+=step) for(let xx=0; xx<W; xx+=step){
+      const t=1-xx/W, fade=Math.max(0,.26*(1-t*1.35))*(0.5+0.5*rnd());
+      if(fade<.02) continue;
+      x.globalAlpha=fade; x.fillStyle='#ffffff'; x.fillRect(xx,yy,s,s);
+      if(rnd()<.006 && t<.5) hi.push([xx,yy]);
+    }
+    x.globalAlpha=.6; x.fillStyle='#9CCFC6'; hi.slice(0,7).forEach(([a,b])=>x.fillRect(a,b,s,s)); x.globalAlpha=1;
   }
-  function open(card){ list=vis(); opener=card.querySelector('.poster'); if(!dlg.open) dlg.showModal(); show(list.indexOf(card)); }
-  function close(){ if(dlg.open) dlg.close(); }
-  dlg.addEventListener('close',()=>{ frame.innerHTML=''; history.replaceState(null,'',location.pathname+location.search); opener&&opener.focus(); });
-  all.forEach(c=>c.querySelector('.poster').addEventListener('click',e=>{
-    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1) return; // let new-tab clicks through to YouTube
-    e.preventDefault(); open(c);
-  }));
-  $('pl-close').addEventListener('click',close);
-  $('pl-prev').addEventListener('click',()=>cur>0&&show(cur-1));
-  $('pl-next').addEventListener('click',()=>cur<list.length-1&&show(cur+1));
-  dlg.addEventListener('click',e=>{ if(e.target===dlg) close(); });
-  dlg.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'&&cur<list.length-1) show(cur+1); if(e.key==='ArrowLeft'&&cur>0) show(cur-1); });
-  // A shared link like robotic.html#VIDEOID opens that video
-  const h=location.hash.slice(1), hit=all.find(c=>c.querySelector('.poster').dataset.vid===h);
-  if(hit) open(hit);
+  draw(); let tm; addEventListener('resize',()=>{clearTimeout(tm);tm=setTimeout(draw,150)});
 })();
 </script>
 </body>
