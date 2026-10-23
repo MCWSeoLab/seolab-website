@@ -117,6 +117,14 @@ section.news{padding-block:0;border-bottom:1px solid var(--line);background:var(
 .partners img{display:block;height:auto}
 .partners .mcw{width:92px}
 .partners .labahn{width:200px}
+.partners .rhpb-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:#007066;font-family:var(--display);font-weight:500;font-size:1rem;line-height:1.2}
+.partners .rhpb{width:58px;border-radius:50%;transition:transform .15s}
+.partners .rhpb-link:hover .rhpb{transform:scale(1.06)}
+.partners .rhpb-link:hover span{text-decoration:underline;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){.partners .rhpb{transition:none}}
+.partners{gap:18px}
+@media (min-width:901px) and (max-width:1100px){.partners{gap:14px}.partners .mcw{width:76px}.partners .labahn{width:160px}.partners .rhpb{width:48px}.partners .rhpb-link{font-size:.9rem;gap:8px}}
+@media (max-width:640px){.partners{gap:14px 16px}.partners .mcw{width:72px}.partners .labahn{width:156px}.partners .rhpb-div{display:none}.partners .rhpb-link{flex-basis:100%}.partners .rhpb{width:52px}}
 .partners .divider{width:1px;align-self:stretch;background:var(--line)}
 .hero-photos{display:grid;gap:18px;min-width:0}
 .hero figure{margin:0}
@@ -317,6 +325,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <a href="https://www.mcw.edu/departments/surgery/divisions/surgical-oncology"><img src="img/mcw.png" alt="Medical College of Wisconsin" class="mcw"></a>
         <span class="divider" aria-hidden="true"></span>
         <a href="https://www.mcw.edu/departments/pancreatic-cancer"><img src="img/labahn.png" alt="LaBahn Pancreatic Cancer Program" class="labahn"></a>
+        <span class="divider rhpb-div" aria-hidden="true"></span>
+        <a href="/robotics/" class="rhpb-link"><img src="img/robotic-hpb/RoboticHPB_avatar_circle_144.png" alt="" class="rhpb"><span>Robotic HPB<br>surgery videos</span></a>
       </div>
     </div>
     <div class="hero-photos">
@@ -341,6 +351,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     </div>
     <!-- To add news: copy one <article class="ncard"> block, put it FIRST (newest first), and set data-label (short date shown on the timeline). -->
     <div class="ntrack" tabindex="0" aria-label="News, newest first">
+      <article class="ncard" data-label="Oct 19, 2026">
+        <div class="meta"><span class="tag">Our publication</span><time datetime="2026-10-19">Oct 19, 2026</time></div>
+        <h3>Review: rethinking oligometastatic pancreatic cancer</h3>
+        <p>In <i>Cancers</i>, Kshitij Gaur, MD, and colleagues trace how oligometastatic pancreatic cancer has been defined, from early anatomic descriptions to the 2026 OligoPanc consensus of up to three metastases in a single organ. The review weighs recent evidence, including a randomized phase II trial with longer progression-free survival after local treatment, links between metastatic site and gene expression in the primary tumor, and more effective second-line systemic therapy. It proposes induction systemic therapy followed by response-guided local treatment of the metastases and primary tumor as an approach that merits prospective study.</p>
+        <div class="nlinks"><a href="https://doi.org/10.3390/cancers18203376">Read in Cancers (MDPI)</a></div>
+      </article>
       <article class="ncard" data-label="Sep 2026">
         <div class="meta"><span class="tag">Clinical trial</span><time datetime="2026-09">Sep 2026</time></div>
         <h3>SOFT Preop trial results presented at ASTRO 2026</h3>
@@ -512,9 +528,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="person"><img src="img/people/conroy-meghan.jpg" alt="Meghan Conroy"><b>Meghan Conroy, MD</b><span>Anai Lab Resident Research Fellow</span></div>
       <div class="person"><img src="img/people/bera-swapna.jpg" alt="Swapna Bera"><b>Swapna Bera, PhD</b><span>Precision Medicine Coordinator and Technician</span></div>
       <div class="person"><img src="img/people/scheuber-ella.jpg" alt="Ella Scheuber"><b>Ella Scheuber</b><span>Lab Manager and Research Technologist</span></div>
-      <div class="person"><div class="ph" aria-hidden="true"><span>BN</span></div><b>Bhabishya Neupane</b><span>Senior Programmer Analyst</span></div>
+      <div class="person"><img src="img/people/neupane-bhabishya.jpg" alt="Bhabishya Neupane"><b>Bhabishya Neupane</b><span>Senior Programmer Analyst</span></div>
       <div class="person"><img src="img/people/sochor-matt.jpg" alt="Matt Sochor"><b>Matt Sochor, PhD</b><span>Data Scientist</span></div>
-      <div class="person"><img src="img/people/mena-melissa.jpg" alt="Melissa Mena"><b>Melissa Mena</b><span>Director, LaBahn Pancreatic Cancer Program</span></div>
+    </div>
+    <p class="sub">LaBahn Pancreatic Cancer Program</p>
+    <div class="people staff">
+      <div class="person"><img src="img/people/mena-melissa.jpg" alt="Melissa Mena"><b>Melissa Mena</b><span>Director</span></div>
+      <div class="person"><img src="img/people/aldakkak-mohammed.jpg" alt="Mohammed Aldakkak"><b>Mohammed Aldakkak, MD</b><span>PI, Surgical Oncology Tissue Bank</span></div>
+      <div class="person"><img src="img/people/hoffmann-katie.jpg" alt="Katie Hoffmann"><b>Katie Hoffmann</b><span>Clinical Genomics Operations Manager</span></div>
     </div>
     <p class="sub">Medical students</p>
     <div class="people students">
@@ -530,6 +551,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="person"><img src="img/people/schmitz-aiden.jpg" alt="Aiden Schmitz"><b>Aiden Schmitz</b><span>MS1</span></div>
       <div class="person"><img src="img/people/husander-peter.jpg" alt="Peter Husander"><b>Peter Husander</b><span>MS1</span></div>
       <div class="person"><img src="img/people/arvind-sriram.jpg" alt="Sriram Arvind"><b>Sriram Arvind</b><span>MS1</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>CM</span></div><b>Christian Mohr</b><span>Medical Student</span></div>
+      <div class="person"><div class="ph" aria-hidden="true"><span>BP</span></div><b>Brendan Prosser</b><span>Medical Student</span></div>
     </div>
     <p class="sub">Alumni</p>
     <div class="people students alumni">
@@ -600,6 +623,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       </div>
       <div class="pubgroup">
         <h3>Reviews</h3>
+        <div class="pub"><span class="yr">2026</span><span class="t">The evolution of oligometastatic pancreatic ductal adenocarcinoma: from anatomic description to biologically informed patient selection</span><span class="a">Gaur KS, Hall WA, Kamgar M, McFall T, Evans DB, <span class="me">Seo YD</span></span><span class="j"><i>Cancers</i> 18:3376 · <a href="https://doi.org/10.3390/cancers18203376">doi:10.3390/cancers18203376</a></span></div>
         <div class="pub"><span class="yr">2026</span><span class="t">Optimal management of resectable pancreatic ductal adenocarcinoma</span><span class="a"><span class="me">Seo YD</span>, Kamgar M</span><span class="j"><i>Annals of Pancreatic Cancer</i> 9:4 · <a href="https://doi.org/10.21037/apc-25-33">doi:10.21037/apc-25-33</a></span></div>
         <div class="pub"><span class="yr">2025</span><span class="t">The Landmark Series: the future of pancreatic cancer clinical trials</span><span class="a"><span class="me">Seo YD</span>, Katz MHG, Snyder RA</span><span class="j"><i>Annals of Surgical Oncology</i> 32:2777–2785 · <a href="https://doi.org/10.1245/s10434-024-16840-2">doi:10.1245/s10434-024-16840-2</a></span></div>
         <div class="pub"><span class="yr">2022</span><span class="t">Preoperative therapy for pancreatic adenocarcinoma: precision beyond anatomy</span><span class="a"><span class="me">Seo YD</span>, Katz MHG</span><span class="j"><i>Cancer</i> 128:3041–3056 · <a href="https://doi.org/10.1002/cncr.34273">doi:10.1002/cncr.34273</a></span></div>
@@ -680,7 +704,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <footer>
   <div class="wrap">
     <span>Seo Lab · Medical College of Wisconsin · MCW Cancer Center · LaBahn Pancreatic Cancer Program</span>
-    <span>© 2026 Seo Lab</span>
+    <span>© 2026 Seo Lab · Last updated October 23, 2026</span>
   </div>
 </footer>
 
